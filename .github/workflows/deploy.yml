@@ -19,11 +19,11 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh ubuntu@${{ secrets.SSH_HOST }} "if [ ! -d 'nodeapp' ]; then \
+          ssh pm161@${{ secrets.SSH_HOST }} "if [ ! -d 'NodeJS' ]; then \
               git clone https://github.com/pm161-ual/NodeJS.git; \
             else \
               cd NodeJS && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
             fi"
-          ssh ubuntu@${{ secrets.SSH_HOST }} "if pgrep node; then forever stopall; fi"
-          ssh ubuntu@${{ secrets.SSH_HOST }} "cd NodeJS && npm install"
-          ssh ubuntu@${{ secrets.SSH_HOST }} "cd NodeJS && forever start src/main.js"
+          ssh pm161@${{ secrets.SSH_HOST }} "if pgrep node; then forever stopall; fi"
+          ssh pm161@${{ secrets.SSH_HOST }} "cd NodeJS && npm install"
+          ssh pm161@${{ secrets.SSH_HOST }} "cd NodeJS && forever start src/main.js"
